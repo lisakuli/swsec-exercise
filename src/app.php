@@ -5,8 +5,20 @@ use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use tdt4237\webapp\Auth;
 use tdt4237\webapp\Hash;
+use tdt4237\webapp\repository\UserRepository;
+use tdt4237\webapp\repository\PatentRepository;
 
-// Håper disse endringene var ok :)
+require_once __DIR__ . '/../vendor/autoload.php';
+
+chdir(__DIR__ . '/../');
+chmod(__DIR__ . '/../web/uploads', 0777);
+
+$app = new Slim([
+    'templates.path' => __DIR__.'/webapp/templates/',
+    'debug' => true,
+    'view' => new Twig()
+
+]);
 
 $view = $app->view();
 $view->parserExtensions = array(

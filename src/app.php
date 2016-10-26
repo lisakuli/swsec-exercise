@@ -8,9 +8,6 @@ use tdt4237\webapp\Hash;
 use tdt4237\webapp\repository\UserRepository;
 use tdt4237\webapp\repository\PatentRepository;
 
-//hei dette er en kommentar
-//for å lære git
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 chdir(__DIR__ . '/../');

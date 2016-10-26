@@ -12,10 +12,10 @@ class UserRepository
 {
     const INSERT_QUERY   = "INSERT INTO users(user, pass, first_name, last_name, phone, company, isadmin) VALUES('%s', '%s', '%s' , '%s' , '%s', '%s', '%s')";
     const UPDATE_QUERY   = "UPDATE users SET email='%s', first_name='%s', last_name='%s', isadmin='%s', phone ='%s' , company ='%s' WHERE id='%s'";
-    const FIND_BY_NAME   = "SELECT * FROM users WHERE user='%s'";
+    //const FIND_BY_NAME   = "SELECT * FROM users WHERE user='%s'";
     const DELETE_BY_NAME = "DELETE FROM users WHERE user='%s'";
     const SELECT_ALL     = "SELECT * FROM users";
-    const FIND_FULL_NAME   = "SELECT * FROM users WHERE user='%s'";
+    //const FIND_FULL_NAME   = "SELECT * FROM users WHERE user='%s'";
 
     /**
      * @var PDO
@@ -50,25 +50,34 @@ class UserRepository
 
     public function getNameByUsername($username)
     {
-        $query = sprintf(self::FIND_FULL_NAME, $username);
+        $stmt = $this->$pdo->prepare("SELECT * FROM users WHERE user=:user");
+        $stmt->execute(array('user' => $username));
 
-        $result = $this->pdo->query($query, PDO::FETCH_ASSOC);
-        $row = $result->fetch();
-        $name = $row['first_name'] + " " + $row['last_name'];
+        //$query = sprintf(self::FIND_FULL_NAME, $username);
+
+        //$result = $this->pdo->query($query, PDO::FETCH_ASSOC);
+        //$row = $result->fetch();
+
+        foreach ($stmt as $row) {
+            $name = $row['first_name'] + " " + $row['last_name'];
+        }
         return $name;
     }
 
     public function findByUser($username)
     {
-        $query  = sprintf(self::FIND_BY_NAME, $username);
-        $result = $this->pdo->query($query, PDO::FETCH_ASSOC);
-        $row = $result->fetch();
+        $stmt = $this->$pdo->prepare('SELECT * FROM users WHERE user=:user');
+        $stmt->execute(array('user' => $username));
+
+        //$query  = sprintf(self::FIND_BY_NAME, $username);
+        //$result = $this->pdo->query($query, PDO::FETCH_ASSOC);
+        //$row = $result->fetch();
         
-        if ($row === false) {
+        if ($stmt === false) {
             return false;
         }
 
-        return $this->makeUserFromRow($row);
+        return $this->makeUserFromRow($stmt);
     }
 
     public function deleteByUsername($username)

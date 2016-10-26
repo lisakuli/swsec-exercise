@@ -13,7 +13,7 @@ class Hash
 
     public static function make($plaintext)
     {
-        $salt = mcrypt_create_iv(22, MCRYPT_DEV_RANDOM);
+        $salt = bin2hex(random_bytes(20));
         return hash('sha256', $plaintext . $salt) . $salt;
 
     }
@@ -26,7 +26,7 @@ class Hash
 
     public function check($plaintext, $hash)
     {
-        return $this->generateHash($plaintext) === $hash;
+        return $this->generateHash($plaintext, $hash) === $hash;
     }
 
 }

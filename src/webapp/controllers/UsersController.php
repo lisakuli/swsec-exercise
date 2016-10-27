@@ -121,7 +121,7 @@ class UsersController extends Controller
 
     public function destroy($username)
     {
-        if ($this->userRepository->deleteByUsername($username) === 1) {
+        if ($this->userRepository->deleteByUsername($username) == true) {
             $this->app->flash('info', "Sucessfully deleted '$username'");
             $this->app->redirect('/admin');
             return;

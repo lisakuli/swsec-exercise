@@ -38,6 +38,10 @@ class PatentValidation {
             }
         }
 
+        if ($file == null) {
+            $this->validationErrors[] = "File needed";
+        }
+
 
         return $this->validationErrors;
     }

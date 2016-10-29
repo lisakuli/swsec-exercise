@@ -23,7 +23,7 @@ class PatentRepository
     {
         $patent = new Patent($row['patentId'], $row['company'], $row['title'], $row['description'], $row['date'], $row['file']);
         $patent->setPatentId($row['patentId']);
-        $patent->setCompany($row['company']);
+        $patent->setCompany($row['use tdt4237\webapp\models\PatentCollection;']);
         $patent->setTitle($row['title']);
         $patent->setDescription($row['description']);
         $patent->setDate($row['date']);

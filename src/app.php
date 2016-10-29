@@ -7,6 +7,7 @@ use tdt4237\webapp\Auth;
 use tdt4237\webapp\Hash;
 use tdt4237\webapp\repository\UserRepository;
 use tdt4237\webapp\repository\PatentRepository;
+use tdt4237\webapp\repository\SearchRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -42,6 +43,7 @@ date_default_timezone_set("Europe/Oslo");
 $app->hash = new Hash();
 $app->userRepository = new UserRepository($app->db);
 $app->patentRepository = new PatentRepository($app->db);
+$app->searchRepository = new SearchRepository($app->db);
 $app->auth = new Auth($app->userRepository, $app->hash);
 
 $ns ='tdt4237\\webapp\\controllers\\';
@@ -80,5 +82,8 @@ $app->get('/patents/:patentId/delete', $ns . 'PatentsController:destroy');
 
 // Admin restricted area
 $app->get('/admin', $ns . 'AdminController:index')->name('admin');
+
+// Search
+$app->get('/search', $ns . 'SearchController:index')->name('searchpatents');
 
 return $app;

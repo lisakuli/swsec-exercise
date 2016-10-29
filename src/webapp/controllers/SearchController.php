@@ -11,9 +11,14 @@ class SearchController extends Controller
         parent::__construct();
     }
 
-    public function search()
+    public function searchForCompany($company)
     {
+    	$patents = $this->searchRepository->searchForCompany($company);
+    }
 
+    public function searchForTitle($title)
+    {
+    	$patents = $this->searchRepository->searchForTitle($title);
     }
 	//TRENGER EN INDEKS - funksjon
     //er dette den som laster alle patenter opp?
@@ -29,5 +34,6 @@ class SearchController extends Controller
         $users = $this->userRepository->all();
         $this->render('search.twig', ['patent' => $patent, 'users' => $users]);
     }
+
 
 }

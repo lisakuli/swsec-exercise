@@ -13,7 +13,21 @@ class SearchController extends Controller
 
     public function search()
     {
-    	
+
+    }
+	//TRENGER EN INDEKS - funksjon
+    //er dette den som laster alle patenter opp?
+    //trenger jeg flere use for å få dette til å funke? 
+
+    public function index()
+    {
+        $patent = $this->patentRepository->all();
+        if($patent != null)
+        {
+            $patent->sortByDate();
+        }
+        $users = $this->userRepository->all();
+        $this->render('search.twig', ['patent' => $patent, 'users' => $users]);
     }
 
 }

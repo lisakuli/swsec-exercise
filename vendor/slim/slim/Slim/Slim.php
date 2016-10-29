@@ -283,6 +283,7 @@ class Slim
      * @return array
      */
     public static function getDefaultSettings()
+    
     {
         return array(
             // Application

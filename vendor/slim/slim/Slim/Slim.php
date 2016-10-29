@@ -286,9 +286,9 @@ class Slim
     {
         return array(
             // Application
-            'mode' => 'development',
+            'mode' => 'production',
             // Debugging
-            'debug' => true,
+            'debug' => false,
             // Logging
             'log.writer' => null,
             'log.level' => \Slim\Log::DEBUG,

@@ -84,6 +84,6 @@ $app->get('/patents/:patentId/delete', $ns . 'PatentsController:destroy');
 $app->get('/admin', $ns . 'AdminController:index')->name('admin');
 
 // Search
-$app->get('/patents', $ns . 'SearchController:index')->name('searchpatents');
+$app->get('/search', $ns . 'SearchController:index')->name('searchpatents');
 
 return $app;

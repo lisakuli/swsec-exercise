@@ -32,15 +32,22 @@ class PatentValidation {
             $this->validationErrors[] = "Title needed";
         }
 
-        if (fileNotPdf($file)) {
-            $this->validationErrors[] = "Only .pdf file type allowed";
+        if ($file != null) {
+            if ($this->fileNotPdf($file)) {
+                $this->validationErrors[] = "Only .pdf file type allowed";
+            }
         }
+
+        if ($file == null) {
+            $this->validationErrors[] = "File needed";
+        }
+
 
         return $this->validationErrors;
     }
 
 
-    private function fileNotPdf($file)
+    public function fileNotPdf($file)
     {
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $fileType = finfo_file($finfo, $file);
